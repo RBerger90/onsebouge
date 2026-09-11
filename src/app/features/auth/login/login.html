@@ -1,1 +1,19 @@
-<p>login works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1>Connexion</h1>
+
+  <label for="email">Email</label>
+  <input id="email" type="email" formControlName="email" />
+  @if (form.controls.email.invalid && form.controls.email.touched) {
+    <p class="error">Email invalide.</p>
+  }
+
+  <label for="password">Mot de passe</label>
+  <input id="password" type="password" formControlName="password" />
+  @if (form.controls.password.invalid && form.controls.password.touched) {
+    <p class="error">6 caractères minimum.</p>
+  }
+
+  <button type="submit">Se connecter</button>
+
+  <p><a routerLink="/register">Pas encore de compte ? S'inscrire</a></p>
+</form>

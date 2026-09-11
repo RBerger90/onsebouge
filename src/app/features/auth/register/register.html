@@ -1,1 +1,25 @@
-<p>register works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h1>Inscription</h1>
+
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email" />
+    @if (form.controls.email.invalid && form.controls.email.touched) {
+    <p class="error">Email invalide.</p>
+    }
+
+    <label for="password">Mot de passe</label>
+    <input id="password" type="password" formControlName="password" />
+    @if (form.controls.password.invalid && form.controls.password.touched) {
+    <p class="error">6 caractères minimum.</p>
+    }
+
+    <label for="confirmPassword">Confirmer le mot de passe</label>
+    <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+    @if (form.errors?.['passwordsMismatch'] && form.controls.confirmPassword.touched) {
+    <p class="error">Les mots de passe ne correspondent pas.</p>
+    }
+
+    <button type="submit">S'inscrire</button>
+
+    <p><a routerLink="/login">Déjà un compte ? Se connecter</a></p>
+</form>

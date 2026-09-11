@@ -1,1 +1,15 @@
-<p>goals-list works!</p>
+<h1>Mes objectifs</h1>
+
+<a routerLink="/goals/new">+ Nouvel objectif</a>
+
+<ul>
+  @for (goal of goals(); track goal.id) {
+    <li>
+      <a [routerLink]="['/goals', goal.id]">
+        {{ goal.title }} — {{ goal.targetValue }} {{ goal.unit }} en {{ goal.durationDays }} jours
+      </a>
+    </li>
+  } @empty {
+    <p>Aucun objectif pour l'instant.</p>
+  }
+</ul>
