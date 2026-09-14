@@ -17,6 +17,7 @@ export class GoalDetail {
   private readonly fb = inject(FormBuilder);
   private readonly progress = inject(Progress);
   private readonly goals = inject(Goals);
+  private readonly canvasRef = viewChild.required<ElementRef<HTMLCanvasElement>>('chartCanvas');
 
   readonly goalId = input.required<string>(); // reçoit le :id de la route, aucun ActivatedRoute à injecter
   protected readonly goal = computed(() => this.goals.getGoal(this.goalId()));
@@ -42,8 +43,6 @@ export class GoalDetail {
     const uniqueId = crypto.randomUUID();
     this.progress.addProgress({ id: uniqueId, goalId: this.goal()!.id, value, date });
   }
-
-  private readonly canvasRef = viewChild.required<ElementRef<HTMLCanvasElement>>('chartCanvas');
 
   constructor() {
     effect(() => {
