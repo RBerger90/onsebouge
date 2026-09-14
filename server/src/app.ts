@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import cors from 'cors';
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import { requireAuth } from './middleware/require-auth.js';
 import { createUser, findUserByEmail } from './users.js';
 
 export const app = express();
@@ -44,4 +45,8 @@ app.post('/api/auth/login', async (req, res) => {
 
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, { expiresIn: '7d' });
   res.json({ token });
+});
+
+app.get('/api/auth/me', requireAuth, (req, res) => {
+  res.json({ userId: req.userId });
 });
