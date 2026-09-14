@@ -2,3 +2,20 @@
     {{goal()?.title}} - {{goal()?.targetValue}} {{goal()?.unit}} - {{goal()?.durationDays}} jours -
     {{goal()?.startDate}}
 </div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h1>Nouvelle entrée</h1>
+
+    <label for="value">Valeur</label>
+    <input id="value" type="number" formControlName="value" />
+    @if (form.controls.value.invalid && form.controls.value.touched) {
+    <p class="error">La valeur est requise.</p>
+    }
+
+    <label for="date">Date</label>
+    <input id="date" type="date" formControlName="date" />
+    @if (form.controls.date.invalid && form.controls.date.touched) {
+    <p class="error">La date est requise.</p>
+    }
+    <button type="submit">Ca c'est fait !</button>
+</form>
+<canvas #chartCanvas></canvas>

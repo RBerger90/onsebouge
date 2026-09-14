@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { toDateInputValue } from '../../../utils/toDateInputValue';
 import { Goals } from '../services/goals';
 
 @Component({
@@ -30,14 +31,7 @@ export class GoalCreate {
 
     const { title, targetValue, unit, durationDays, startDate } = this.form.getRawValue();
     const goalId = crypto.randomUUID();
-    this.goals.addGoal({id: goalId, title, targetValue, unit, durationDays,  startDate });
+    this.goals.addGoal({ id: goalId, title, targetValue, unit, durationDays, startDate });
     this.router.navigateByUrl('/goals/' + goalId);
   }
-}
-
-function toDateInputValue(date: Date): string {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
 }
