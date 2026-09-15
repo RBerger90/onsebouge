@@ -25,3 +25,5 @@ Content-Type: application/json
 ### Profil connecté (réutilise le token renvoyé par la requête "login" ci-dessus)
 GET {{baseUrl}}/api/auth/me
 Authorization: Bearer {{login.response.body.token}}
+
+
